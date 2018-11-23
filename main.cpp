@@ -79,11 +79,7 @@ int main()
     cc::solve();
 
 #ifndef ONLINE_JUDGE
-    //如下东西不继承
-    //1:构造函数和析构函数
-    //2:复制赋值操作
-    //3:友元
-    //4:私有成员
+    
 
     while (true)
         ;
