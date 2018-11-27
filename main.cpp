@@ -2,6 +2,9 @@
 
 #include <algorithm>
 #include <iostream>
+#include <string>
+#include <stdio.h>
+#include <memory.h>
 
 namespace cc
 {
@@ -9,62 +12,102 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::move;
-using std::qsort;
-const int N = 1000;
-class Node
-{
-  public:
-    int fee;
-    int day;
-    int index;
-    Node(int fee, int day, int index) : day(day), fee(fee), index(index)
-    {
-    }
-    Node() = default;
-};
+using std::sort;
+using std::string;
 
-int cmp(const void *a, const void *b)
+int cmp(const string &a, const string &b)
 {
-    Node *n1 = (Node *)(a);
-    Node *n2 = (Node *)(b);
-    int total1 = n1->fee * n2->day;
-    int total2 = n2->fee * n1->day;
-    if (total1 == total2)
-    {
-        return n1->index - n2->index;
-    }
-    if (total1 < total2)
-        return 1;
-    return -1;
+
+    return a.length() < b.length();
 }
+
+const int N = 300;
 
 void solve()
 {
     int n;
     cin >> n;
-    int t = 0;
+    getchar();
+    getchar();
     while (n--)
     {
-        if(t!=0)
-        cout<<endl;
-        ++t;
-        int k;
-        cin >> k;
-        int fee, day;
-        int total = 0;
-        Node nodes[N];
-        for (int i = 0; i < k; i++)
-        {
-            cin >> day >> fee;
-            Node node(fee, day, i + 1);
-            nodes[total++] = node;
-        }
-        qsort(nodes, total, sizeof(Node), cmp);
 
-        cout << nodes[0].index;
-        for (int i = 1; i < total; i++)
-            cout << " " << nodes[i].index;
-        cout << endl;
+        string strs[N];
+        int total = 0;
+        
+        string s;
+        int totalLength = 0;
+        while (getline(cin, s))
+        {
+            if(s.length()==0)
+            break;
+            strs[total++] = s;
+            totalLength += s.length();
+        }
+        sort(strs, strs + total, cmp);
+        totalLength = totalLength / total*2;
+        for (int i = 0;; i++)
+        {
+            int vis[N];
+            memset(vis, 0, sizeof(vis));
+            string temp = strs[i] + strs[total - 1];
+            int count = 1;
+            vis[i] = vis[total - 1] = 1;
+            for (int j = 0; j < total; j++)
+            {
+                if(vis[j])
+                continue;
+                for (int k = 0; k < total && k!=j; k++)
+                {
+                    if (vis[k])
+                        continue;
+                    if (strs[j].length() + strs[k].length() != totalLength)
+                        continue;
+                    if (strs[j] + strs[k] == temp || strs[k] + strs[j] == temp)
+                    {
+                        vis[j] = vis[k] = 1;
+                        
+                        ++count;
+                        break;
+                    }
+                }
+            }
+            if (count == total / 2)
+            {
+                cout << temp << endl;
+                break;
+            }
+            else
+            {
+                memset(vis, 0, sizeof(vis));
+                string temp = strs[total - 1] + strs[i];
+                count = 1;
+                vis[i] = vis[total - 1] = 1;
+                for (int j = 0; j < total; j++)
+                {
+                    if (vis[j])
+                        continue;
+                    for (int k = 0; k < total && k != j; k++)
+                    {
+                        if (vis[j] || vis[k])
+                            continue;
+                        if (strs[j].length() + strs[k].length() != totalLength)
+                            continue;
+                        if (strs[j] + strs[k] == temp || strs[k] + strs[j] == temp)
+                        {
+                            vis[j] = vis[k] = 1;
+                            ++count;
+                            break;
+                        }
+                    }
+                }
+                if (count == total / 2)
+                {
+                    cout<<temp<<endl;
+                    break;
+                }
+            }
+        }
     }
 }
 
@@ -79,7 +122,6 @@ int main()
     cc::solve();
 
 #ifndef ONLINE_JUDGE
-    
 
     while (true)
         ;
