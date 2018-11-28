@@ -29,44 +29,41 @@ void solve()
     cin >> n;
     getchar();
     getchar();
+    int tt = 0;
     while (n--)
     {
-
+        if (tt != 0)
+            cout << endl;
+        ++tt;
         string strs[N];
         int total = 0;
-        
+
         string s;
         int totalLength = 0;
         while (getline(cin, s))
         {
-            if(s.length()==0)
-            break;
+            if (s.length() == 0)
+                break;
             strs[total++] = s;
-            totalLength += s.length();
         }
         sort(strs, strs + total, cmp);
-        totalLength = totalLength / total*2;
-        for (int i = 0;; i++)
+        totalLength = strs[0].size() + strs[total - 1].size();
+        int vis[N];
+        for (int i = 0;i<total; i++)
         {
-            int vis[N];
             memset(vis, 0, sizeof(vis));
             string temp = strs[i] + strs[total - 1];
             int count = 1;
             vis[i] = vis[total - 1] = 1;
             for (int j = 0; j < total; j++)
             {
-                if(vis[j])
-                continue;
-                for (int k = 0; k < total && k!=j; k++)
+                for (int k = 0; k < total; k++)
                 {
-                    if (vis[k])
+                    if (vis[j] || vis[k] || k == j || strs[j].length() + strs[k].length() != totalLength)
                         continue;
-                    if (strs[j].length() + strs[k].length() != totalLength)
-                        continue;
-                    if (strs[j] + strs[k] == temp || strs[k] + strs[j] == temp)
+                    if (strs[k] + strs[j] == temp || strs[j] + strs[k] == temp)
                     {
                         vis[j] = vis[k] = 1;
-                        
                         ++count;
                         break;
                     }
@@ -85,15 +82,11 @@ void solve()
                 vis[i] = vis[total - 1] = 1;
                 for (int j = 0; j < total; j++)
                 {
-                    if (vis[j])
-                        continue;
-                    for (int k = 0; k < total && k != j; k++)
+                    for (int k = 0; k < total; k++)
                     {
-                        if (vis[j] || vis[k])
+                        if (vis[j] || vis[k] || k == j || strs[j].length() + strs[k].length() != totalLength)
                             continue;
-                        if (strs[j].length() + strs[k].length() != totalLength)
-                            continue;
-                        if (strs[j] + strs[k] == temp || strs[k] + strs[j] == temp)
+                        if (strs[k] + strs[j] == temp || strs[j] + strs[k] == temp)
                         {
                             vis[j] = vis[k] = 1;
                             ++count;
@@ -103,7 +96,7 @@ void solve()
                 }
                 if (count == total / 2)
                 {
-                    cout<<temp<<endl;
+                    cout << temp << endl;
                     break;
                 }
             }
