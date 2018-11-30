@@ -19,6 +19,7 @@ using std::string;
 
 void solve()
 {
+    CCQueue<int> q;
     
 }
 

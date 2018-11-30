@@ -35,13 +35,13 @@ class CCQueue : public cc::cc_basic_queue<T>
     }
 
     //false if queue flow
-    bool push(T &&t) override
+     bool push(T &&t) override
     {
         if (length == (rear + 1) || rear == front)
             return false;
         t[rear++] = std::forward(t);
     }
-    bool empty() override
+     bool empty() override
     {
         return rear == front;
     }
@@ -49,21 +49,18 @@ class CCQueue : public cc::cc_basic_queue<T>
     {
         return t[front];
     }
-    bool pop() override
+     bool pop() override
     {
         ++front;
         return true;
     }
 
-    int size()
+    int size() override
     {
         return rear-front;
     }
 
-    T front()
-    {
-        return t[front];
-    }
+   
 
     ~CCQueue()
     {
