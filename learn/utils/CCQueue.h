@@ -39,7 +39,7 @@ class CCQueue : public cc::cc_basic_queue<T>
     {
         if (length == (rear + 1) || rear == front)
             return false;
-        t[rear++] = std::forward(t);
+        (t+rear) = &(std::forward(t));
     }
      bool empty() override
     {
