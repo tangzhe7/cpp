@@ -5,7 +5,9 @@
 #include <string>
 #include <stdio.h>
 #include <memory.h>
-
+#include <sstream>
+#include <map>
+#include <queue>
 #include "learn/utils/CCQueue.h"
 
 namespace cc
@@ -16,21 +18,15 @@ using std::endl;
 using std::move;
 using std::sort;
 using std::string;
+using std::stringstream;
+using std::map;
+using std::queue;
+
 
 void solve()
 {
-    CCQueue<int> q;
-    
+    CCQueue<int>* q = new CCQueue<int>();
 }
-
-void test()
-{
-    
-
-
-
-}
-
 } // namespace cc
 
 int main()

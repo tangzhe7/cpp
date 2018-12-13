@@ -4,6 +4,7 @@
 #include <queue>
 #include <deque>
 #include "cc_basic_queue.h"
+#include <type_traits>
 namespace cc
 {
 using std::forward;
@@ -21,7 +22,8 @@ class CCQueue : public cc::cc_basic_queue<T>
     {
         t = new T[1 << 10];
         this->length = 1 << 10;
-        this->index = 0;
+        this->front = 0;
+        this->rear = 0;
     };
     explicit CCQueue(int length)
     {
@@ -30,16 +32,17 @@ class CCQueue : public cc::cc_basic_queue<T>
             throw length;
         t = new T[length];
         this->length = length;
-        this->index = 0;
+        this->front = 0;
         this->rear = 0;
     }
 
-    //false if queue flow
-     bool push(T &&t) override
+    
+    bool push(T&& params) override
     {
         if (length == (rear + 1) || rear == front)
             return false;
-        (t+rear) = &(std::forward(t));
+        t[rear] = std::forward(params);
+        return true;
     }
      bool empty() override
     {
