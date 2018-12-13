@@ -1,3 +1,10 @@
 *.out
 a.out.dSYM
 .vscode
+*.sln
+*.vcxproj
+*.vcxproj.*
+Debug
+.vs
+pch.cpp
+pch.h

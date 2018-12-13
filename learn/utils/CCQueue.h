@@ -39,9 +39,9 @@ class CCQueue : public cc::cc_basic_queue<T>
     
     bool push(T&& params) override
     {
-        if (length == (rear + 1) || rear == front)
+        if (length == (rear + 1))
             return false;
-        t[rear] = std::forward(params);
+        t[rear++] = std::forward<T>(params);
         return true;
     }
      bool empty() override
