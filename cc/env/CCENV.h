@@ -1,10 +1,10 @@
 #ifndef CCENV_H
 #define CCENV_H
     #ifdef __GUNC__
-        //gunc 编译器
+        //gunc
         #define GUNC
     #elif __clang__
-        //Clang 编译器
+        //Clang
         #define  CLANG
     #else 
         #define  UNKONW
