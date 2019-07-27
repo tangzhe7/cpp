@@ -5,7 +5,7 @@
 namespace cc
 {
 	using std::ostream;
-	class SDS
+	class CC_SDS
 	{
 	private:
 		CC_INT32 len;
@@ -13,19 +13,20 @@ namespace cc
 		char * buf;
 		constexpr static CC_INT32 malloc1 = 1024 * 1024;
 	public:
-		SDS();
-		SDS(const char* str, CC_INT32 length);
-		SDS(const SDS& sds);
+		CC_SDS();
+		CC_SDS(const char* str, CC_INT32 length);
+		CC_SDS(const CC_SDS& sds);
+		~CC_SDS();
 		CC_INT32 sdslen();
 		CC_INT32 sdsfree();
 		//clear
 		void sdsclear();
 		//append 
-		void sdscat(const char*  append, int length);
+		void sdscat(const char*  append, CC_INT32 length);
 		//copy
 		void sdscpy(const char * s, CC_INT32 length);
-		bool sdscmp(const SDS& append,CC_INT32 length);
-		friend ostream& operator <<(ostream & os, const SDS& cs) 
+		bool sdscmp(const CC_SDS& append,CC_INT32 length);
+		friend ostream& operator <<(ostream & os, const CC_SDS& cs) 
 		{
 			for (int i = 0;i < cs.len;i++)
 				os << *(cs.buf + i);

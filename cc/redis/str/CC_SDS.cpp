@@ -1,5 +1,5 @@
-#include "pch.h"
-#include "SDS.h"
+//#include "pch.h"
+#include "CC_SDS.h"
 #include <exception>
 #include <memory>
 #include <iostream>
@@ -9,22 +9,22 @@ namespace cc
 	using std::nothrow;
 	using std::ostream;
 
-	SDS::SDS()
+	CC_SDS::CC_SDS()
 	{
 		this->len = 0;
 		this->free = 0;
 		this->buf = CC_NULL;
 	};
 
-	SDS::SDS(const char* sc, CC_INT32 length)
+	CC_SDS::CC_SDS(const char* sc, CC_INT32 length)
 	{
 		//TODO check length
-		if (length >= SDS::malloc1) 
+		if (length >= CC_SDS::malloc1) 
 		{
 			//>=1mb free 1mb
-			buf = new(nothrow)char[length+SDS::malloc1];
-			this->len = length + SDS::malloc1;
-			this->free = SDS::malloc1;
+			buf = new(nothrow)char[length+CC_SDS::malloc1];
+			this->len = length + CC_SDS::malloc1;
+			this->free = CC_SDS::malloc1;
 		}
 		else
 		{
@@ -37,7 +37,7 @@ namespace cc
 		//TODO check is null
 		memcpy(buf, sc, length);
 	}
-	SDS::SDS(const SDS& sds) 
+	CC_SDS::CC_SDS(const CC_SDS& sds) 
 	{
 		this->len = sds.len;
 		this->free = sds.free;
@@ -47,22 +47,22 @@ namespace cc
 	}
 	
 
-	CC_INT32 SDS::sdslen()
+	CC_INT32 CC_SDS::sdslen()
 	{
 		return this->len;
 	};
-	CC_INT32 SDS::sdsfree()
+	CC_INT32 CC_SDS::sdsfree()
 	{
 		return this->free;
 	};
 	//clear
-	void SDS::sdsclear()
+	void CC_SDS::sdsclear()
 	{
 		this->free = this->free + this->len;
 		this->len = 0;
 	};
 	//append 
-	void SDS::sdscat(const char*  append, CC_INT32 length)
+	void CC_SDS::sdscat(const char*  append, CC_INT32 length)
 	{
 		//append
 		if (this->free < length) 
@@ -88,7 +88,7 @@ namespace cc
 		}
 	};
 	//copy and replace
-	void SDS::sdscpy(const char * re,CC_INT32 length) 
+	void CC_SDS::sdscpy(const char * re,CC_INT32 length) 
 	{
 		//check
 		if (this->len+this->free < length) 
@@ -109,7 +109,7 @@ namespace cc
 		}
 		memcpy(buf, re,length);
 	};
-	bool SDS::sdscmp(const SDS& append, CC_INT32 length) 
+	bool CC_SDS::sdscmp(const CC_SDS& append, CC_INT32 length) 
 	{
 		if (this->len != length)
 			return false;
@@ -119,6 +119,11 @@ namespace cc
 		return true;
 	};
 
+
+	CC_SDS::~CC_SDS()
+	{
+		delete this->buf;
+	}
 	
 
 };

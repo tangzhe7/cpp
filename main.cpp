@@ -13,7 +13,8 @@
 #include <bitset>
 #include<exception>
 #include "cc/env/CCENV.h"
-#include "cc/redis/str/SDS.h"
+#include "cc/redis/str/CC_SDS.h"
+#include "cc/redis/linklist/CC_LINKLIST.cpp"
 
 using namespace std;
 
@@ -31,13 +32,15 @@ namespace cc
 	using std::string;
 	using std::swap;
 	using std::vector;
+	using std::nothrow;
+	using std::ostream;
 }
    
  
 int main () {
-	cc::SDS ccc("123",3);
-	ccc.sdscat("456",3);
-	cout << ccc << endl;
+	cc::CC_LINKLIST<int>  cl;
+	cout << cl.listlength() << endl;
+
   return 0;
 } 
 
