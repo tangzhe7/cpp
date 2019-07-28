@@ -1,8 +1,9 @@
 //#include "pch.h"
 #include "./CC_LINKLIST_NODE.h"
+#include <exception>
 namespace cc
 {
-
+	using std::nothrow;
 	template<class T> CC_LINKLIST_NODE<T>::CC_LINKLIST_NODE()
 	{
 		this->next = CC_NULL;
