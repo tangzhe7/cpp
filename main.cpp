@@ -37,10 +37,15 @@ namespace cc
 }
    
  
-int main () {
-	cc::CC_LINKLIST<int>  cl;
-	cout << cl.listlength() << endl;
-
+int main () 
+{
+	int j = 10;
+	cc::CC_LINKLIST<int>*  cl2 =new cc::CC_LINKLIST<int>();
+	cout << cl2->listlength() << endl;
+	cl2->listAddNodeTail(j);
+	cout << cl2->listlength() << endl;
+	cout << cl2->searchKey(j)->val() << endl;
+	delete cl2;
   return 0;
 } 
 

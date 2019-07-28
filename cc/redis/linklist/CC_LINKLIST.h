@@ -5,7 +5,6 @@
 
 namespace cc 
 {
-#define CLASS_T template<class T>
 	template<class T>  class CC_LINKLIST
 	{
 	private:
@@ -13,11 +12,18 @@ namespace cc
 		CC_LINKLIST_NODE<T> * l;
 		CC_INT32 len;
 	public:
+		~CC_LINKLIST();
 		CC_LINKLIST();
 		CC_INT32 listlength();
 		CC_LINKLIST_NODE<T>* head();
 		CC_LINKLIST_NODE<T>* last();
-
+		/***添加到表头**/
+		void listAddNodeHead( T t);
+		void listAddNodeTail(T t);
+		/**
+		 *if not ret CC_NULL
+		 */
+		CC_LINKLIST_NODE<T>* searchKey(T& t);
 	};
 }
 #endif // !CC_LINKLIST_H
