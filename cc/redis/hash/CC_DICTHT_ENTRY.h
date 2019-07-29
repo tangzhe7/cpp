@@ -5,7 +5,7 @@ namespace cc
 	template<class K,class V> class CC_DICTHT_ENTRY
 	{
 	private:
-		T k;
+		K k;
 		V v;
 		CC_DICTHT_ENTRY<K, V>* next;
 

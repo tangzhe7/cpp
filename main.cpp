@@ -37,10 +37,38 @@ namespace cc
 	using std::ostream;
 }
    
- 
+class Test 
+{
+public:
+	const int& operator[]( const int& index) 
+	{
+		std::cout << "[]" << std::endl;
+		return 2;
+	}
+	int& operator[](const int&& index)
+	{
+		std::cout << "[][]" << std::endl;
+		int j = 3;
+		return j;
+	}
+	const int& operator=(const int& index) 
+	{
+		std::cout << "=" << std::endl;
+		return 3;
+	}
+	friend std::ostream& operator<<(std::ostream& out, const Test&)
+	{
+		out <<1 << endl;
+		return out;
+	}
+};
 int main () 
 {
-
+	Test t;
+	const int i = 12;
+	int k = t[1] = i;
+	cout << k << endl;
+	cout << t[i] << endl;
   return 0;
 } 
 

@@ -11,8 +11,8 @@ namespace cc
 	}
 	template<class T> CC_LINKLIST<T>::CC_LINKLIST()
 	{
-		this->h = new<nothrow> CC_LINKLIST_NODE<T>();
-		this->l = new<nothrow> CC_LINKLIST_NODE<T>();
+		this->h = new(nothrow) CC_LINKLIST_NODE<T>();
+		this->l = new(nothrow) CC_LINKLIST_NODE<T>();
 		h->setNextNode(this->l);
 		this->len = 0;
 	}
@@ -31,14 +31,14 @@ namespace cc
 	}
 	template<class T> void CC_LINKLIST<T>::listAddNodeHead( T t) 
 	{
-		CC_LINKLIST_NODE<T>* nNode = new<nothrow> CC_LINKLIST_NODE<T>(CC_NULL,CC_NULL, t);
+		CC_LINKLIST_NODE<T>* nNode = new(nothrow) CC_LINKLIST_NODE<T>(CC_NULL,CC_NULL, t);
 		this->h->setNextNode(nNode);
 		++(this->len);
 	}
 
 	template<class T> void CC_LINKLIST<T>::listAddNodeTail(T t)
 	{
-		CC_LINKLIST_NODE<T>* nNode = new<nothrow> CC_LINKLIST_NODE<T>(CC_NULL, CC_NULL, t);
+		CC_LINKLIST_NODE<T>* nNode = new(nothrow) CC_LINKLIST_NODE<T>(CC_NULL, CC_NULL, t);
 		this->l->setPrevNode(nNode);
 		++(this->len);
 	}

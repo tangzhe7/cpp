@@ -3,11 +3,11 @@
 namespace cc
 {
 
-	template<class K, class V> CC_DICT<K,V>::~CC_DICT() 
+	/*template<class K, class V> CC_DICT<K,V>::~CC_DICT() 
 	{
 		
-	};
-	template<class K, class V> CC_DICT<K, V>::CC_DICT()
+	};*/
+	/*template<class K, class V> CC_DICT<K, V>::CC_DICT()
 	{
 		this->trehashidx = -1;
 		this->hascode = CC_NULL;
@@ -19,7 +19,7 @@ namespace cc
 	template<class K, class V> void CC_DICT<K, V>::setHashFunc(U_CC_INT32(*hashcode)(const K& key))
 	{
 	
-	};
+	};*/
 	/**
 	 *如果存在直接返回
 	 *

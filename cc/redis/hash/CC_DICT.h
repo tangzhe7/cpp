@@ -11,7 +11,7 @@ namespace cc
 	{
 	private:
 		U_CC_INT32 (*hashcode)(const K& key);
-		CC_DICTHT tables[2];
+		CC_DICTHT<K,V> tables[2];
 		//未进行rehash时值是-1
 		int trehashidx;
 	public:
@@ -24,8 +24,12 @@ namespace cc
 		 *
 		 **/
 		void put(K k,V v);
-		const K& operator[]();
-		V get(K k);
+		//get
+		const V& operator[](K& k);
+		//set
+		//const V& operator[](K& k,V& v);
+
+		//V get(K k);
 
 	};
 }
